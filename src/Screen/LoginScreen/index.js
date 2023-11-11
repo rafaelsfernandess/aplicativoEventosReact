@@ -5,9 +5,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import styles from './styles'
+import { ScrollView } from "react-native";
 
 function LoginScreen({ navigation }) {
-    
+
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
 
@@ -19,30 +20,36 @@ function LoginScreen({ navigation }) {
     }
 
     return (
-
         <View style={styles.container}>
             <View style={styles.containerTitle}>
-                <Text variant="displayMedium" style={styles.title}>Bem vindo</Text>
+                <Text variant="displayMedium" style={styles.title}>Cadastre-se</Text>
             </View>
             <View style={styles.containerInputs}>
-                <TextInput
-                    label="Email"
-                    value={nome}
-                    onChangeText={text => setNome(text)}
-                />
-                <TextInput
-                    label="Senha"
-                    value={nome}
-                    onChangeText={text => setNome(text)}
-                />
-                <View style={ styles.containerButton }> 
-                    <Button icon="login" mode="contained" buttonColor="#5DB075" onPress={() => handleLogin()}>
-                        Entrar
+                <ScrollView>
+                    <View style={styles.teste}>
+                        <TextInput
+                            mode='outlined'
+                            label="Email"
+                            value={nome}
+                            onChangeText={text => setNome(text)}
+                        />
+                        <TextInput
+                            mode='outlined'
+                            label="Senha"
+                            value={nome}
+                            onChangeText={text => setNome(text)}
+                        />
+
+                    </View>
+                </ScrollView>
+            </View>
+            <View style={styles.containerButton}>
+                <View style={styles.buttons}>
+                    <Button style={styles.button} mode="contained" buttonColor="#5DB075" onPress={() => handleLogin()}>
+                        <Text style={styles.buttonTextWhite}>Entrar</Text>
                     </Button>
-                </View>
-                <View style={ styles.containerButton }> 
-                    <Button icon="content-save" mode="contained" buttonColor="transparent" textColor="#5DB075" onPress={() => handleCreateUser()}>
-                        Cadastre-se
+                    <Button mode="text" style={styles.button} textColor="#5DB075" onPress={() => handleCreateUser()}>
+                        <Text style={styles.buttonTextGreen}>Cadastre-se</Text>
                     </Button>
                 </View>
             </View>
