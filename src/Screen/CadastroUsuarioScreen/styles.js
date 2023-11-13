@@ -32,7 +32,7 @@ export default StyleSheet.create({
         paddingBottom: 10
     },
     teste:{
-        gap:10
+        gap: 10
     }
     
 

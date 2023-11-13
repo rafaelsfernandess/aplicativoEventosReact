@@ -8,8 +8,9 @@ import styles from './styles'
 function EventoScreen({ route }) {
 
   const titulo = route.params.titulo
-  const dataHora = route.params.dataHora
   const descricao = route.params.descricao
+  const dataInicio = route.params.dataInicio
+  const dataTermino = route.params.dataTermino
   const id = route.params.id
 
   return (
@@ -19,13 +20,13 @@ function EventoScreen({ route }) {
         {titulo}
       </Text>
 
-      <View s>
+      <View>
 
         <Text style={{ textAlign: 'center', fontWeight: 'bold' }} variant="bodyLarge">
           Período
         </Text>
         <Text style={{ textAlign: 'center' }} variant="bodyLarge">
-          {dataHora}
+        Das {dataInicio} até as {dataTermino}
         </Text>
 
       </View>

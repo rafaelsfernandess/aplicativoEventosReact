@@ -11,15 +11,14 @@ export default StyleSheet.create({
         marginTop: 20,
         marginBottom: 20,
     },
-    titulos:{
-
-    },
-    button:{
-        display: 'flex',
-        justifyContent: "center",
-        alignItems: 'flex-end',
+    containerButtons:{
+        display:"flex",
+        flexDirection: "row",
+        justifyContent:"flex-end",
+        alignContent: "flex-end",
         flex: 1
-    }
+    },
+  
     
 
 })

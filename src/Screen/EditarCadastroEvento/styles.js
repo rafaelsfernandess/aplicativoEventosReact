@@ -33,14 +33,6 @@ export default StyleSheet.create({
     },
     teste:{
         gap:10
-    },
-    containerButton:{
-        display: 'flex',
-        gap: 15,
-        width: '100%',
-        justifyContent:'center',
-        alignItems:"center",
-        alignContent: 'center'
     }
     
 
