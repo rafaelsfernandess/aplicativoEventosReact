@@ -14,7 +14,7 @@ export default function Routes() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='lista-eventos'>
+      <Stack.Navigator initialRouteName='LoginScreen'>
         <Stack.Screen name="login" component={LoginScreen} />
         <Stack.Screen name="lista-eventos" component={ListaEventosScreen} />
         <Stack.Screen name="cadastro-usuario" component={CadastroUsuarioScreen} />

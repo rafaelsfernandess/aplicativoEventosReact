@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 import { TextInput, Text, Button } from "react-native-paper";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { ScrollView } from "react-native";
 
@@ -15,8 +16,31 @@ function CadastroUsuarioScreen({ navigation }) {
     const [senha, setSenha] = useState("");
     const [confirmarSenha, setConfirmarSenha] = useState("");
 
-    function handleSaveUser() {
-        navigation.navigate('login')
+    async function handleSaveUser() {
+        try {
+            const usuariosArmazenados = await AsyncStorage.getItem('usuarios');
+            const usuarios = usuariosArmazenados ? JSON.parse(usuariosArmazenados) : [];
+
+            const novoUsuario = {
+                id: usuarios.length + 1,
+                nome,
+                email,
+                senha
+            };
+
+            usuarios.push(novoUsuario);
+
+            await AsyncStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+            setNome()
+            setEmail()
+            setSenha()
+            Alert.alert('Usuário salvo com sucesso')
+            navigation.navigate('login')
+        } catch (error) {
+            alert('Erro ao salvar usuário')
+            console.error('Erro ao salvar usuario:', error);
+        }
     }
 
     return (

@@ -12,7 +12,6 @@ function EventoScreen({ route }) {
   const dataInicio = route.params.dataInicio
   const dataTermino = route.params.dataTermino
   const id = route.params.id
-
   return (
     <View style={styles.container}>
 
