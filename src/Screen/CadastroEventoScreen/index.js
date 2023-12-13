@@ -16,8 +16,7 @@ function CadastroEventoScreen({ navigation }) {
     const [horarioTermino, setHorarioTermino] = useState({})
     const [inputDateInico, setInputDateInicio] = useState('')
     const [descricao, setDescricao] = useState('')
-    const [ hInicio, setHinicio] = useState('')
-    const [ hTermino, setHTermino] = useState('')
+
 
     const onDismissInicio = useCallback(() => {
         setHorarioInicio(false)
@@ -26,16 +25,16 @@ function CadastroEventoScreen({ navigation }) {
 
     const onConfirmInicio = useCallback(
         ({ hours, minutes }) => {
+            console.log(hours+', '+minutes)
             setHorarioInicio(false);
             setHorarioInicio({ hours, minutes });
-            setHinicio(horarioInicio.hours+':'+horarioInicio.minutes)
         },
         [setHorarioInicio]
     );
 
     const onDismissTermino = useCallback(() => {
         setHorarioTermino(false)
-       
+
 
     }, [setHorarioTermino])
 
@@ -43,7 +42,6 @@ function CadastroEventoScreen({ navigation }) {
         ({ hours, minutes }) => {
             setHorarioTermino(false);
             setHorarioTermino({ hours, minutes });
-            setHTermino(horarioInicio.hours+':'+horarioInicio.minutes)
 
         },
         [setHorarioTermino]
@@ -57,11 +55,10 @@ function CadastroEventoScreen({ navigation }) {
             const novoEvento = {
                 id: eventos.length + 1,
                 titulo,
-                hInicio,
-                hTermino,
+                hInicio: horarioInicio.hours+':'+horarioInicio.minutes,
+                hTermino: horarioTermino.hours+':'+horarioTermino.minutes,
                 descricao,
             };
-
             eventos.push(novoEvento);
 
             await AsyncStorage.setItem('eventos', JSON.stringify(eventos));
@@ -113,13 +110,13 @@ function CadastroEventoScreen({ navigation }) {
                     <View style={styles.containerButton}>
 
                         <Text>Horario início do evento</Text>
-                        <Text>{ horarioInicio.hours }:{ horarioInicio.minutes }</Text>
+                        <Text>{horarioInicio.hours}:{horarioInicio.minutes}</Text>
                         <Button icon="clock-plus-outline" onPress={() => setHorarioInicio(true)} uppercase={false} mode="outlined">
                             Hora de Inicio
                         </Button>
 
                         <Text>Horario fim do evento</Text>
-                        <Text>{ horarioTermino.hours }:{ horarioTermino.minutes }</Text>
+                        <Text>{horarioTermino.hours}:{horarioTermino.minutes}</Text>
                         <Button icon="clock-minus-outline" onPress={() => setHorarioTermino(true)} uppercase={false} mode="outlined">
                             Hora de Termino
                         </Button>

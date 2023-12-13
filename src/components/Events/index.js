@@ -5,7 +5,6 @@ import styles from './styles'
 import { ScrollView } from "react-native";
 
 function CardEvents({ titulo, horarioInicio, horarioTermino, id, descricao, navigation }) {
-
     return (
         <View style={styles.borda}>
             <View style={styles.container}>
@@ -20,8 +19,8 @@ function CardEvents({ titulo, horarioInicio, horarioTermino, id, descricao, navi
                         onPress={() =>
                             navigation.navigate('editar-evento', {
                                 titulo,
-                                horarioInicio,
-                                horarioTermino,
+                                horarioInicio:horarioInicio,
+                                horarioTermino:horarioTermino,
                                 descricao,
                                 id
                             })
@@ -32,8 +31,8 @@ function CardEvents({ titulo, horarioInicio, horarioTermino, id, descricao, navi
                         onPress={() =>
                             navigation.navigate('evento', {
                                 titulo,
-                                horarioInicio,
-                                horarioTermino,
+                                horarioInicio:horarioInicio,
+                                horarioTermino:horarioTermino,
                                 descricao,
                                 id
 

@@ -52,6 +52,7 @@ function CadastroUsuarioScreen({ navigation }) {
                 <ScrollView>
                     <View style={styles.teste}>
                         <TextInput
+                            
                             mode='outlined'
                             label="Nome Completo"
                             value={nome}
@@ -61,20 +62,18 @@ function CadastroUsuarioScreen({ navigation }) {
                             mode='outlined'
                             label="Email"
                             value={email}
+                            autoCapitalize='none'
                             onChangeText={text => setEmail(text)}
                         />
                         <TextInput
                             mode='outlined'
                             label="Senha"
                             value={senha}
+                            secureTextEntry={true}
+                            autoCapitalize='none'
                             onChangeText={text => setSenha(text)}
                         />
-                        <TextInput
-                            mode='outlined'
-                            label="Confirmar Senha"
-                            value={confirmarSenha}
-                            onChangeText={text => setConfirmarSenha(text)}
-                        />
+                    
 
                     </View>
                 </ScrollView>

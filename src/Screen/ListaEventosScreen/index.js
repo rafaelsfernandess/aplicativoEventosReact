@@ -14,22 +14,26 @@ function ListaEventosScreen({ navigation }) {
     navigation.navigate('cadastro-evento');
   }
 
- 
-  // Esta função será chamada sempre que um novo evento for criado
-  const atualizarListaEventos = async () => {
-    try {
-      const eventosString = await AsyncStorage.getItem('eventos');
-      if (eventosString) {
-        const eventosRecuperados = JSON.parse(eventosString);
-        setEventos(eventosRecuperados);
-      } else {
-        console.log('Nenhum evento encontrado no AsyncStorage');
+  useEffect(()=>{
+    const atualizarListaEventos = async () => {
+      try {
+        const eventosString = await AsyncStorage.getItem('eventos');
+        if (eventosString) {
+          const eventosRecuperados = JSON.parse(eventosString);
+          console.log(eventosRecuperados)
+
+          setEventos(eventosRecuperados);
+        } else {
+          console.log('Nenhum evento encontrado no AsyncStorage');
+        }
+      } catch (error) {
+        console.error('Erro ao atualizar a lista de eventos:', error);
       }
-    } catch (error) {
-      console.error('Erro ao atualizar a lista de eventos:', error);
-    }
-  };
-  atualizarListaEventos()
+    };atualizarListaEventos()
+  },[])
+
+
+  
 
   return (
     <View style={styles.container}>
@@ -39,8 +43,8 @@ function ListaEventosScreen({ navigation }) {
             <CardEvents
               key={evento.id}
               titulo={evento.titulo}
-              horarioInicio={evento.horarioInicio}
-              horarioTermino={evento.horarioTermino}
+              horarioInicio={evento.hInicio}
+              horarioTermino={evento.hTermino}
               id={evento.id}
               descricao={evento.descricao}
               navigation={navigation}
@@ -55,7 +59,6 @@ function ListaEventosScreen({ navigation }) {
         style={styles.fab}
         onPress={() => {
           handleCreateEvent();
-          atualizarListaEventos(); // Atualiza a lista após criar um novo evento
         }}
       />
     </View>

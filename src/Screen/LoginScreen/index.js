@@ -58,12 +58,16 @@ function LoginScreen({ navigation }) {
                             mode='outlined'
                             label="Email"
                             value={email}
+                            autoCapitalize='none'
+
                             onChangeText={text => setEmail(text)}
                         />
                         <TextInput
                             mode='outlined'
                             label="Senha"
                             value={senha}
+                            autoCapitalize='none'
+                            secureTextEntry={true}
                             onChangeText={text => setSenha(text)}
                         />
 

@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 import { Text, TextInput, Button } from "react-native-paper";
 import styles from './styles';
 import { useState, useEffect } from "react";
@@ -18,12 +18,11 @@ function EditarCadastroEventoScreen({ route }) {
     async function handleSaveEvent() {
         try {
             let eventosDoLocalStorage = await AsyncStorage.getItem('eventos');
-
             if (eventosDoLocalStorage) {
                 let eventos = JSON.parse(eventosDoLocalStorage);
-
+                
                 const eventoIndex = eventos.findIndex(evento => evento.id === id);
-
+                
                 if (eventoIndex !== -1) {
                     eventos[eventoIndex] = {
                         ...eventos[eventoIndex],
@@ -32,7 +31,8 @@ function EditarCadastroEventoScreen({ route }) {
                         horarioTermino,
                         descricao
                     };
-
+                    
+                    console.log(eventos)
                     await AsyncStorage.setItem('eventos', JSON.stringify(eventos));
                 }
             }

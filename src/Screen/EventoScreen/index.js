@@ -9,9 +9,11 @@ function EventoScreen({ route }) {
 
   const titulo = route.params.titulo
   const descricao = route.params.descricao
-  const dataInicio = route.params.dataInicio
-  const dataTermino = route.params.dataTermino
+  const dataInicio = route.params.horarioInicio
+  const dataTermino = route.params.horarioTermino
   const id = route.params.id
+
+
   return (
     <View style={styles.container}>
 
