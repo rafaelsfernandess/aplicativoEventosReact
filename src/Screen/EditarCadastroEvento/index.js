@@ -10,8 +10,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 function EditarCadastroEventoScreen({ route }) {
 
     const [titulo, setTitulo] = useState(route.params.titulo);
-    const [horarioInicio, setHorarioInicio] = useState(route.params.horarioInicio);
-    const [horarioTermino, setHorarioTermino] = useState(route.params.horarioTermino);
+    const [horarioInicio, setHorarioInicio] = useState({
+        hours: parseInt(route.params.horarioInicio.split(':')[0]),
+        minutes: parseInt(route.params.horarioInicio.split(':')[1]),
+    });
+    const [horarioTermino, setHorarioTermino] = useState({
+        hours: parseInt(route.params.horarioTermino.split(':')[0]),
+        minutes: parseInt(route.params.horarioTermino.split(':')[1]),
+    });
+
     const [descricao, setDescricao] = useState(route.params.descricao);
     const [id, setId] = useState(route.params.id);
 
@@ -27,12 +34,11 @@ function EditarCadastroEventoScreen({ route }) {
                     eventos[eventoIndex] = {
                         ...eventos[eventoIndex],
                         titulo,
-                        horarioInicio,
-                        horarioTermino,
+                        hInicio: `${horarioInicio.hours}:${horarioInicio.minutes}`, // Converter de volta para string
+                        hTermino: `${horarioTermino.hours}:${horarioTermino.minutes}`, // Converter de volta para string
                         descricao
                     };
                     
-                    console.log(eventos)
                     await AsyncStorage.setItem('eventos', JSON.stringify(eventos));
                 }
             }
@@ -63,15 +69,21 @@ function EditarCadastroEventoScreen({ route }) {
                         activeOutlineColor='#5DB075'
                         mode="outlined"
                         label="Horário de início"
-                        value={horarioInicio}
-                        onChangeText={text => setHorarioInicio(text)}
+                        value={`${horarioInicio.hours}:${horarioInicio.minutes}`}
+                        onChangeText={text => {
+                            const [hours, minutes] = text.split(':');
+                            setHorarioInicio({ hours: parseInt(hours), minutes: parseInt(minutes) });
+                        }}
                     />
                     <TextInput
                         activeOutlineColor='#5DB075'
                         mode="outlined"
                         label="Horário de término"
-                        value={horarioTermino}
-                        onChangeText={text => setHorarioTermino(text)}
+                        value={`${horarioTermino.hours}:${horarioTermino.minutes}`}
+                        onChangeText={text => {
+                            const [hours, minutes] = text.split(':');
+                            setHorarioTermino({ hours: parseInt(hours), minutes: parseInt(minutes) });
+                        }}
                     />
                     <TextInput
                         activeOutlineColor='#5DB075'

@@ -32,7 +32,27 @@ function ListaEventosScreen({ navigation }) {
     };atualizarListaEventos()
   },[])
 
-
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      const atualizarListaEventos = async () => {
+        try {
+          const eventosString = await AsyncStorage.getItem('eventos');
+          if (eventosString) {
+            const eventosRecuperados = JSON.parse(eventosString);
+            console.log(eventosRecuperados)
+  
+            setEventos(eventosRecuperados);
+          } else {
+            console.log('Nenhum evento encontrado no AsyncStorage');
+          }
+        } catch (error) {
+          console.error('Erro ao atualizar a lista de eventos:', error);
+        }
+      };atualizarListaEventos()
+    });
+  
+    return unsubscribe;
+  }, [navigation]);
   
 
   return (
